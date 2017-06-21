@@ -67,12 +67,14 @@ class Katfile():
             
             if times >= 100:
                 
+                active_window = globalvar.get_active_window_title()
+                
                 command = 'wmctrl -a KatFile -'
                 os.system(command)
                 
                 self.k.tab_key('Return')
             
-                command = 'wmctrl -a {0}'.format(globalvar.get_active_window_title())
+                command = 'wmctrl -a {0}'.format(active_window)
                 os.system(command)
                 
                 return 0

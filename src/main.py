@@ -26,6 +26,7 @@ class Main():
         rapidgatorAccount = getAccount.getAccount('rapidgator', 1)
         bigfileAccount = getAccount.getAccount('bigfile')
         katfileAccount = getAccount.getAccount('katfile')
+        animeSharingAccount = getAccount.getAccount('animesharing')
         
         url = 'http://hcapital.tk/?show=entry&id={0}'.format(entry) 
         browser.visit(url)
@@ -96,10 +97,10 @@ class Main():
             files = globalvar.getFilesFromFolder(filename)
            
             while True:
-                if self.hosting == 'hosting':
+                if self.hosting == 'katfile':
                     urls = katfile.upload(browser, files, katfileAccount)
                     if urls == 0:
-                        self.hosting = 'big'
+                        self.hosting = 'bigfile'
                         continue
                     else:
                         hostingUrls.append(urls)
@@ -133,7 +134,7 @@ class Main():
         
         print('Creating the post on anime-sharing')
     
-        animeSharing.createPost(browser, post, entryType)
+        animeSharing.createPost(browser, post, entryType, animeSharingAccount)
     
         return 0
     
@@ -148,9 +149,6 @@ prof["browser.download.dir"] = globalvar.download_folder
 prof["browser.helperApps.neverAsk.saveToDisk"] = "application/octet-stream"
 
 with Browser('firefox', profile_preferences=prof) as browser:
-    globalvar.sleep(10)
-    print(globalvar.get_active_window_title())
-    globalvar.sleep(100)
     
     browser.driver._is_remote = False
 
@@ -165,7 +163,9 @@ with Browser('firefox', profile_preferences=prof) as browser:
         
         print('The entry nr that will be handled = {0}'.format(entry))
            
-        state = Main.main(browser, entry)
+        main = Main()
+        
+        state = main.main(browser, entry)
     
         if state == None:
             print('state was incorrect')
