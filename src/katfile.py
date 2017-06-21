@@ -69,10 +69,11 @@ class Katfile():
                 
                 active_window = globalvar.get_active_window_title()
                 
-                command = 'wmctrl -a KatFile -'
+                command = 'wmctrl -a KatFile'
                 os.system(command)
                 
-                self.k.tab_key('Return')
+                self.k.press_key('Return')
+                self.k.release_key('Return')
             
                 command = 'wmctrl -a {0}'.format(active_window)
                 os.system(command)
