@@ -6,7 +6,6 @@ import entryData
 import animeSharing
 import hcapital
 import getAccount
-import pykeyboard
 
 from splinter import Browser
 

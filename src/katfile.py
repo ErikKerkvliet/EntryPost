@@ -1,5 +1,6 @@
 import globalvar
 import pykeyboard
+import pymouse
 import os
 
 globalvar = globalvar.Globalvar()
@@ -8,6 +9,7 @@ class Katfile():
     
     def __init__(self):
         self.k = pykeyboard.PyKeyboard()
+        self.m = pymouse.PyMouse()
 
     #login on to rapidgator.net
     def login(self, browser, account):
@@ -68,13 +70,18 @@ class Katfile():
             if times >= 100:
                 
                 active_window = globalvar.get_active_window_title()
+                posX = self.m.position()[0]
+                posY = self.m.position()[1]
                 
                 command = 'wmctrl -a KatFile'
                 os.system(command)
                 
                 self.k.press_key('Return')
                 self.k.release_key('Return')
-            
+                
+                self.m.press(661, 425) 
+                self.m.move(posX, posY)
+                
                 command = 'wmctrl -a {0}'.format(active_window)
                 os.system(command)
                 
