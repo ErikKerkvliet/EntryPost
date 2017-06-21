@@ -42,7 +42,7 @@ class Globalvar():
     def get_active_window_title(self):
         windows = subprocess.Popen("xdotool getwindowfocus getwindowname", stdout=subprocess.PIPE, shell="FALSE")
         
-        print root.communicate()[0]
+        return windows.communicate()[0]
 
 
     def removeAllFiles(self):

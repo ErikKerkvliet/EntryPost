@@ -63,7 +63,7 @@ class Katfile():
             times += 1
             globalvar.sleep(10)		
     
-            print('uploading...')
+            print('uploading {0}'.format(times))
             
             if times >= 100:
                 
