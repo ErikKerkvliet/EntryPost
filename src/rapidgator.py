@@ -33,7 +33,7 @@ class Rapidgator():
         login_field = globalvar.getElement(browser, 'id', 'LoginForm_email')
         
         if login_field['value'] == '':
-            login_field.fill(account['username'])
+            login_field.fill(account['mail'])
         else:
             # if something already has been inserted it is probably account info from a logged in account. 
             # Meaning the logging in can be stopped

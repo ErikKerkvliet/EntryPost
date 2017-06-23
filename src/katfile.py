@@ -70,6 +70,7 @@ class Katfile():
             if times >= 100:
                 
                 active_window = globalvar.get_active_window_title()
+                
                 posX = self.m.position()[0]
                 posY = self.m.position()[1]
                 
@@ -84,8 +85,9 @@ class Katfile():
                     
                 self.m.move(posX, posY)
                 
-                command = 'wmctrl -a {0}'.format(active_window)
-                os.system(command)
+                if active_window != '':
+                    command = 'wmctrl -a {0}'.format(active_window)
+                    os.system(command)
                 
                 return 0
                 
