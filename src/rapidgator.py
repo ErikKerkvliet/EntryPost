@@ -33,7 +33,7 @@ class Rapidgator():
         login_field = globalvar.getElement(browser, 'id', 'LoginForm_email')
         
         if login_field['value'] == '':
-            login_field.fill('yuuichi.sagara@gmail.com')
+            login_field.fill(account['username'])
         else:
             # if something already has been inserted it is probably account info from a logged in account. 
             # Meaning the logging in can be stopped
@@ -42,7 +42,7 @@ class Rapidgator():
             return
             
         password_field = globalvar.getElement(browser, 'id', 'LoginForm_password')
-        password_field.fill('kdRwvg')
+        password_field.fill(account['password'])
         
         # click the submit link to finalize the login
         link = globalvar.getElement(browser, 'xpath', '//*[@id="registration"]/ul/li[5]/a[1]')
