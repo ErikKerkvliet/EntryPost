@@ -45,17 +45,17 @@ class Katfile():
             browser.driver.find_element_by_id('file_0').send_keys(f) 
             globalvar.sleep(10)
            
-        filename_fields = globalvar.getElement(browser, 'xpath', '//table[@id="files_list"]//font[@class="xfname"]')
-        delete_btns = globalvar.getElement(browser, 'xpath', '//table[@id="files_list"]//img')
-        
-        filenames = []
-        for i in range(0, len(delete_btns)):
-            filename = filename_fields[i]['innerHTML']
+            filename_fields = globalvar.getElement(browser, 'xpath', '//table[@id="files_list"]//font[@class="xfname"]')
+            delete_btns = globalvar.getElement(browser, 'xpath', '//table[@id="files_list"]//img')
             
-            if filename not in filenames:
-                filenames.append(filename)
-            else:
-                delete_btns[i].click()
+            filenames = []
+            for i in range(0, len(delete_btns)):
+                filename = filename_fields[i]['innerHTML']
+                
+                if filename not in filenames:
+                    filenames.append(filename)
+                else:
+                    delete_btns[i].click()
              
         upload_btn = globalvar.getElement(browser, 'xpath', '//*[@id="upload_controls"]/input[1]')
         upload_btn.click()
@@ -73,13 +73,15 @@ class Katfile():
                 posX = self.m.position()[0]
                 posY = self.m.position()[1]
                 
-                command = 'wmctrl -a KatFile'
+                command = 'wmctrl -a KatFile -'
                 os.system(command)
                 
                 self.k.press_key('Return')
                 self.k.release_key('Return')
                 
-                self.m.press(661, 425) 
+                for i in range(0, 20):
+                    self.m.click(500 + (i * 20), 425) 
+                    
                 self.m.move(posX, posY)
                 
                 command = 'wmctrl -a {0}'.format(active_window)
