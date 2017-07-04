@@ -45,7 +45,7 @@ class Rapidgator():
         password_field.fill(account['password'])
         
         # click the submit link to finalize the login
-        link = globalvar.getElement(browser, 'xpath', '//*[@id="registration"]/ul/li[5]/a[1]')
+        link = globalvar.getElement(browser, 'xpath', '//*[@id="registration"]/ul/li[7]/a[1]')
         
         link.click()
         
