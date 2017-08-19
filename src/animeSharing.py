@@ -132,12 +132,17 @@ class AnimeSharing():
             button.click()
             
             sleep = (len(images) * 10 + 11)
-    
-            while browser.is_text_not_present('Just uploaded ', sleep):
-                globalvar.sleep(1)
-                    
             
-            globalvar.sleep(2, 4)
+            times = 0
+            while browser.is_text_not_present('Just uploaded '):
+                globalvar.sleep(1)
+                times += 1
+                
+                if times > sleep:
+                    import sys
+                    sys.exit()
+            
+            globalvar.sleep(2)
             
             if len(images) == 1:
                 url = browser.url

@@ -17,6 +17,9 @@ entryData = entryData.Config()
 animeSharing = animeSharing.AnimeSharing()
 hcapital = hcapital.Hcapital()
 getAccount = getAccount.GetAccount()
+animeSharingAccount = getAccount.getAccount('animesharing')
+entryType = ''
+post = ''
 
 class Main():
     def __init__(self):
@@ -26,7 +29,6 @@ class Main():
         rapidgatorAccount = getAccount.getAccount('rapidgator', 1)
         bigfileAccount = getAccount.getAccount('bigfile')
         katfileAccount = getAccount.getAccount('katfile')
-        animeSharingAccount = getAccount.getAccount('animesharing')
         
         url = 'http://hcapital.tk/?show=entry&id={0}'.format(entry) 
         browser.visit(url)
@@ -71,7 +73,7 @@ class Main():
             if go_on == True:
                 continue 
                 
-            print('The filename of this entry is: {0}'.format(filename))
+            print('The filename of this entry is: "{0}"'.format(filename))
     
             print('Downloading files')
     
@@ -100,6 +102,10 @@ class Main():
                 if self.hosting == 'katfile':
                     urls = katfile.upload(browser, files, katfileAccount)
                     if urls == 0:
+                        katfile.logout(browser)
+                        katfileAccount = getAccount.getAccount('katfile2')
+                        continue
+                    elif urls == -1:
                         self.hosting = 'bigfile'
                         continue
                     else:
@@ -178,7 +184,9 @@ with Browser('firefox', profile_preferences=prof) as browser:
                     break
                 else:
                     globalvar.sleep(1000, 1800)
-    
+                    
+                    animeSharing.createPost(browser, post, entryType, animeSharingAccount)
+                    
             print('========= Post nr: {0} ========='.format(postsMade))
     
         

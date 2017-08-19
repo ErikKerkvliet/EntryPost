@@ -11,6 +11,11 @@ class Katfile():
         self.k = pykeyboard.PyKeyboard()
         self.m = pymouse.PyMouse()
 
+    #logout from katfile
+    def logout(self, browser):
+        url = 'http://katfile.com/?op=logout'
+        browser.visit(url)
+        
     #login on to rapidgator.net
     def login(self, browser, account):
         
@@ -89,7 +94,10 @@ class Katfile():
                     command = 'wmctrl -a {0}'.format(active_window)
                     os.system(command)
                 
-                return 0
+                if account['username'] == 'yuuichi':
+                    return 0
+                elif account['username'] == 'yuuichisagara':
+                    return -1
                 
         textarea = globalvar.getElement(browser, 'xpath', '//*[@id="container"]/div/div[2]/div/div[1]/textarea')
             
